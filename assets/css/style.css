@@ -1,20 +1,71 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* Landing Page Section */
+#landing-page {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#landing-page h2 {
+  color: #007bb5;
+}
+
+.input-field input[type="text"] {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.input-field input[type="text"]::placeholder {
+  color: #bbb;
+}
+
+.btn {
+  margin-top: 20px;
+}
+
+/* Footer */
+.page-footer {
+  width: 100%;
+  padding: 10px 0;
+  color: white;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+
 /* 
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
  */
  #map {
-    height: 400px;
-    width: 400px;
-  }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  /* html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  } */
+  height: 400px;
+  width: 400px;
+}
 
-  
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+/* html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
