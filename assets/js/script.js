@@ -1,3 +1,4 @@
+// generates map on page, with given coordinates
 let map;
 
 async function initMap() {
