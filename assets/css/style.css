@@ -1,71 +1,136 @@
 /* General Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  color: #333;
 }
 
-/* Main Container */
-.container {
+/* Header */
+header {
+  background-color: #007bb5;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* Navigation */
+nav {
+  background-color: #005f87;
+  padding: 0.5rem 0;
+}
+
+nav ul {
+  list-style: none;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ffdd57;
+}
+
+/* Main Content */
+main {
+  padding: 2rem;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-/* Landing Page Section */
-#landing-page {
+#welcome-section {
   background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
-#landing-page h2 {
-  color: #007bb5;
-}
-
-.input-field input[type="text"] {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.input-field input[type="text"]::placeholder {
-  color: #bbb;
-}
-
-.btn {
-  margin-top: 20px;
+#map {
+  width: 100%;
+  height: 400px;
+  background-color: #e0e0e0;
+  border: 2px solid #007bb5;
+  border-radius: 8px;
 }
 
 /* Footer */
-.page-footer {
-  width: 100%;
-  padding: 10px 0;
+footer {
+  background-color: #007bb5;
   color: white;
   text-align: center;
-  position: absolute;
+  padding: 1rem 0;
+  position: fixed;
   bottom: 0;
+  width: 100%;
 }
 
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-  height: 400px;
-  width: 400px;
+footer p {
+  margin: 0;
 }
-
-/* 
- * Optional: Makes the sample page fill the window. 
- */
-/* html,
+/* General Styles */
 body {
-  height: 100%;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-} */
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Landing Page */
+#landing-page {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 5rem;
+}
+
+/* Form Styles */
+.input-field label {
+  color: #007bb5;
+}
+
+.input-field input {
+  border-bottom: 1px solid #007bb5;
+}
+
+.btn {
+  background-color: #007bb5;
+  color: white;
+}
+
+/* Footer */
+footer.page-footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: #007bb5;
+  color: white;
+}
+
+footer.page-footer p {
+  margin: 0;
+}
+
