@@ -38,7 +38,7 @@ async function initMap() {
 initMap();
 
 function nearbySearch() {
-  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=500&types=resturants&length=10`;
+  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=1500&keyword=resturant&length=10`;
 
 fetch(url, {
   method: 'GET',
