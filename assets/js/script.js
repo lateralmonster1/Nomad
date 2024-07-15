@@ -1,4 +1,4 @@
-const placesApiKey = "ChIJj61dQgK6j4AR4GeTYWZsKWwChIJj61dQgK6j4AR4GeTYWZsKWw";
+const placesApiKey = "AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE";
 const johnsKey ="AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o"
 const lat = 32.7767;
 const lng = -96.7970;
@@ -38,7 +38,7 @@ async function initMap() {
 initMap();
 
 function nearbySearch() {
-  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${johnsKey}&location=${lat},${lng}&radius=500&types=resturants&length=10`;
+  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=500&types=resturants&length=10`;
 
 fetch(url, {
   method: 'GET',
