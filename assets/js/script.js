@@ -1,9 +1,14 @@
 const placesApiKey = "AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE";
-const johnsKey = "AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o"
+const johnsKey = "AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o";
 // lat/lng variables set location in map for initMap()
-const lat = 32.7767;
-const lng = -96.7970;
-const KEYWORD = 'resturant'
+let lat = 32.7767;
+let lng = -96.797;
+const KEYWORD = "resturant";
+let map;
+let marker;
+let geocoder;
+let response;
+
 
 // Testing google.gecoding api;
 // fetch(locQueryUrl)
@@ -18,14 +23,11 @@ const KEYWORD = 'resturant'
 //       console.error(error);
 //     });
 
-
-
 //============================================================end of testing block================================================================
 // generates map on page with given coordinates
 let service;
 let infowindow;
 
-let map;
 // creates map on page
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
@@ -33,8 +35,12 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: lat, lng: lng },
     zoom: 8,
-
   });
+  marker = new google.maps.Marker({
+    map,
+  });
+  geocoder = new google.maps.Geocoder();
+
   nearbySearch(lat, lng, KEYWORD);
 }
 
@@ -44,11 +50,11 @@ function nearbySearch(lat, lng, keyword) {
   const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=1500&keyword=${keyword}`;
 
   fetch(url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Origin': 'https://yourdomain.com',
-      'X-Requested-With': 'XMLHttpRequest'
-    }
+      Origin: "https://yourdomain.com",
+      "X-Requested-With": "XMLHttpRequest",
+    },
   })
     .then(function (response) {
       return response.json();
@@ -59,18 +65,18 @@ function nearbySearch(lat, lng, keyword) {
     })
     // .then(response => response.json())
     // .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-
+    .catch((error) => console.error("Error:", error));
 }
 function createMarker(place, index) {
-  if (!place.results[index].geometry || !place.results[index].geometry.location) return;
+  if (!place.results[index].geometry || !place.results[index].geometry.location)
+    return;
 
-  const marker = new google.maps.Marker({
+  const cMarker = new google.maps.Marker({
     map,
     position: place.results[index].geometry.location,
   });
 
-  google.maps.event.addListener(marker, "click", () => {
+  google.maps.event.addListener(cMarker, "click", () => {
     infowindow.setContent(place.results[index].name || "");
     infowindow.open(map);
   });
@@ -84,38 +90,36 @@ function renderMarkers(data) {
       createMarker(data, i);
       count++;
       i++;
-    }
-    else if (data.results[i].rating > 4) {
+    } else if (data.results[i].rating > 4) {
       createMarker(data, i);
       count++;
       i++;
-
-    }
-    else {
+    } else {
       i++;
     }
-
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const hotelForm = document.getElementById('hotel-form');
-  const mainPageSection = document.getElementById('main-page');
-  const landingPageSection = document.getElementById('landing-page');
+document.addEventListener("DOMContentLoaded", function () {
+  const hotelForm = document.getElementById("hotel-form");
+  const mainPageSection = document.getElementById("main-page");
+  const landingPageSection = document.getElementById("landing-page");
 
-  hotelForm.addEventListener('submit', function (event) {
+  hotelForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const hotelInput = document.getElementById('hotel-input').value;
-    document.getElementById('location').textContent = hotelInput;
-    landingPageSection.classList.add('hide');
-    mainPageSection.classList.remove('hide');
+    const hotelInput = document.getElementById("hotel-input").value;
+    document.getElementById("location").textContent = hotelInput;
+
+    geocode({ address: hotelInput });
+
+    landingPageSection.classList.add("hide");
+    mainPageSection.classList.remove("hide");
   });
 
-  newSearchLink.addEventListener('click', function (event) {
+  newSearchLink.addEventListener("click", function (event) {
     event.preventDefault();
-    mainPageSection.classList.add('hide');
-    landingPageSection.classList.remove('hide');
-
+    mainPageSection.classList.add("hide");
+    landingPageSection.classList.remove("hide");
   });
 
   initMap();
@@ -132,36 +136,35 @@ function storeData(query) {
 
 function clear() {
   marker.setMap(null);
-  responseDiv.style.display = "none";
 }
 
 function geocode(request) {
-  clear();
+  // clear();
   geocoder
     .geocode(request)
     .then((result) => {
       const { results } = result;
 
+console.log(results);
+
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
       marker.setMap(map);
-      responseDiv.style.display = "block";
-      response.innerText = JSON.stringify(result, null, 2);
+      // response.innerText = JSON.stringify(result, null, 2);
 
-      console.log(results[0].geometry.location);
+      // console.log(results[0].geometry.location.lat());
+      lat = results[0].geometry.location.lat();
+      lng = results[0].geometry.location.lng();
+      nearbySearch(lat, lng, KEYWORD);
+
       return results;
-
-
     })
     .catch((e) => {
       alert("Geocode was not successful for the following reason: " + e);
     });
 }
 
-
 initMap();
-
-
 
 // const Places_URL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=resturants&location=-34.397,150.644&radius=5m&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg`;
 // let placesHeader = new Headers({
