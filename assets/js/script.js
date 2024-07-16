@@ -17,7 +17,7 @@ let infowindow;
 async function initMap() {
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
-    "marker",
+    "marker"
   );
   // map takes in lat/long coordinates from ("lat" and "lng" variables (defined above)?)
   map = new Map(document.getElementById("map"), {
@@ -72,7 +72,7 @@ async function createMarker(place, index) {
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
   infowindow = new InfoWindow();
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
-    "marker",
+    "marker"
   );
   const pin = new PinElement({
     glyph: `${index + 1}`,
@@ -84,6 +84,9 @@ async function createMarker(place, index) {
     title: place.results[index].name,
     content: pin.element,
     gmpClickable: true,
+    icon: {
+      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+    },
   });
 
   // google.maps.event.addListener(cMarker, "click", () => {
