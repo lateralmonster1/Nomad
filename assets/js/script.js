@@ -49,6 +49,7 @@ function nearbySearch(lat, lng, keyword) {
       return response.json();
     })
     .then(function (data) {
+      // console.log(data);
       renderMarkers(data);
     })
 
@@ -68,7 +69,7 @@ async function createMarker(place, index) {
   //   content: pin.element,
   //   gmpClickable: true,
   // });
-  console.log(place.results[index]);
+  // console.log(place.results[index]);
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
   infowindow = new InfoWindow();
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
@@ -84,9 +85,9 @@ async function createMarker(place, index) {
     title: place.results[index].name,
     content: pin.element,
     gmpClickable: true,
-    icon: {
-      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-    },
+    // icon: {
+    //   url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+    // },
   });
 
   // google.maps.event.addListener(cMarker, "click", () => {
@@ -99,7 +100,8 @@ async function createMarker(place, index) {
     const { target } = domEvent;
 
     infowindow.close();
-    infowindow.setContent(cMarker.title);
+    infowindow.setContent(`<p>${cMarker.title}</p><p>Location: ${place.results[index].vicinity}</p><p>Discription: ${place.results[index].types[0]}</p><p>Status: ${place.results[index].business_status}</p>
+      <p>Overall User Rating: ${place.results[index].rating}</p><p>Number of Reviews: ${place.results[index].user_ratings_total}</p>`);
     infowindow.open(cMarker.map, cMarker);
   });
 }
@@ -167,7 +169,7 @@ function geocode(request) {
     .then((result) => {
       const { results } = result;
 
-      console.log(results);
+      // console.log(results);
 
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
