@@ -109,7 +109,7 @@ async function createMarker(place, index) {
 function renderMarkers(data) {
   let count = 0;
   let i = 0;
-  while (count < 5 && i < data.results.length) {
+  while (count < 10 && i < data.results.length) {
     if (data.results[i].rating >= 4.7) {
       createMarker(data, i);
       count++;
