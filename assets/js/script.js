@@ -15,11 +15,15 @@ let infowindow;
 
 // creates map on page
 async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps");
+  const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
+    "marker",
+  );
   // map takes in lat/long coordinates from ("lat" and "lng" variables (defined above)?)
   map = new Map(document.getElementById("map"), {
     center: { lat: lat, lng: lng },
     zoom: 15,
+    mapId: "demo",
   });
   marker = new google.maps.Marker({
     map,
@@ -50,22 +54,50 @@ function nearbySearch(lat, lng, keyword) {
 
     .catch((error) => console.error("Error:", error));
 }
-function createMarker(place, index) {
+async function createMarker(place, index) {
   if (!place.results[index].geometry || !place.results[index].geometry.location)
     return;
 
-  const cMarker = new google.maps.Marker({
-    map,
+  // const cMarker = new google.maps.Marker({
+  //   map,
+  //   position: place.results[index].geometry.location,
+  //   title: place.results[index].name,
+  //   icon: {
+  //     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+  //   },
+  //   content: pin.element,
+  //   gmpClickable: true,
+  // });
+  console.log(place.results[index]);
+  const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+  infowindow = new InfoWindow();
+  const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
+    "marker",
+  );
+  const pin = new PinElement({
+    glyph: `${index + 1}`,
+    scale: 1.5,
+  });
+  const cMarker = new AdvancedMarkerElement({
     position: place.results[index].geometry.location,
+    map,
     title: place.results[index].name,
-    icon: {
-      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-    },
+    content: pin.element,
+    gmpClickable: true,
   });
 
-  google.maps.event.addListener(cMarker, "click", () => {
-    infowindow.setContent(place.results[index].name || "");
-    infowindow.open(map);
+  // google.maps.event.addListener(cMarker, "click", () => {
+  //   infowindow.setContent(place.results[index].name || "");
+  //   infowindow.open(map);
+  // });
+
+  // Add a click listener for each marker, and set up the info window.
+  cMarker.addListener("click", ({ domEvent, latLng }) => {
+    const { target } = domEvent;
+
+    infowindow.close();
+    infowindow.setContent(cMarker.title);
+    infowindow.open(cMarker.map, cMarker);
   });
 }
 
