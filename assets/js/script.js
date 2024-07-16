@@ -5,11 +5,9 @@ let lat = 32.7767;
 let lng = -96.797;
 const KEYWORD = "resturant";
 let map;
-let marker 
+let marker;
 let geocoder;
 let response;
-
-
 
 // generates map on page with given coordinates
 let service;
@@ -28,8 +26,8 @@ async function initMap() {
   });
   geocoder = new google.maps.Geocoder();
 
-//   nearbySearch(lat, lng, KEYWORD);
- }
+  //   nearbySearch(lat, lng, KEYWORD);
+}
 
 initMap();
 // runs API search for locations nearby target, defined by same lat-long
@@ -47,7 +45,6 @@ function nearbySearch(lat, lng, keyword) {
       return response.json();
     })
     .then(function (data) {
-      
       renderMarkers(data);
     })
 
@@ -60,10 +57,10 @@ function createMarker(place, index) {
   const cMarker = new google.maps.Marker({
     map,
     position: place.results[index].geometry.location,
-
+    title: place.results[index].name,
     icon: {
-      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-    }
+      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+    },
   });
 
   google.maps.event.addListener(cMarker, "click", () => {
@@ -135,9 +132,7 @@ function geocode(request) {
     .then((result) => {
       const { results } = result;
 
-console.log(results);
-
-
+      console.log(results);
 
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
