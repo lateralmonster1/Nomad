@@ -10,20 +10,7 @@ let geocoder;
 let response;
 
 
-// Testing google.gecoding api;
-// fetch(locQueryUrl)
-//     .then(function (response) {
-//       // TODO: Handle response and check for errors
-//     })
-//     .then(function (locRes) {
-//       // TODO: Update resultTextEl with search query
-//       // TODO: Check if results exist, if not, show a message
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//     });
 
-//============================================================end of testing block================================================================
 // generates map on page with given coordinates
 let service;
 let infowindow;
@@ -41,8 +28,8 @@ async function initMap() {
   });
   geocoder = new google.maps.Geocoder();
 
-  nearbySearch(lat, lng, KEYWORD);
-}
+//   nearbySearch(lat, lng, KEYWORD);
+ }
 
 initMap();
 // runs API search for locations nearby target, defined by same lat-long
@@ -60,11 +47,10 @@ function nearbySearch(lat, lng, keyword) {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
+      
       renderMarkers(data);
     })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
+
     .catch((error) => console.error("Error:", error));
 }
 function createMarker(place, index) {
@@ -86,11 +72,11 @@ function renderMarkers(data) {
   let count = 0;
   let i = 0;
   while (count < 5 && i < data.results.length) {
-    if (data.results[i].rating > 4.3) {
+    if (data.results[i].rating >= 4.7) {
       createMarker(data, i);
       count++;
       i++;
-    } else if (data.results[i].rating > 4) {
+    } else if (data.results[i].rating >= 4.5) {
       createMarker(data, i);
       count++;
       i++;
@@ -165,31 +151,3 @@ console.log(results);
 }
 
 initMap();
-
-// const Places_URL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=resturants&location=-34.397,150.644&radius=5m&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg`;
-// let placesHeader = new Headers({
-//   "X-Goog-FieldMask" :"cplaces.displayName,places.formattedAddress",
-//   "Content-Type" : "application/json",
-//   "X-Goog-API-Key": "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",});
-
-// fetch(Places_URL,{
-//   headers: {
-//     "X-Goog-FieldMask" :"cplaces.displayName,places.formattedAddress",
-//     "Content-Type" : "application/json",
-//     "X-Goog-API-Key": "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",}})
-// .then(function (response) {
-//   if(response.ok){
-//     console.log(response);
-//     return response.jason();
-//   }
-//   else{
-//     console.log('error');
-//   }
-// })
-// // .then(function (locRes) {
-// //   // TODO: Update resultTextEl with search query
-// //   // TODO: Check if results exist, if not, show a message
-// // })
-// .catch(function (error) {
-//   console.error(error);
-// });
