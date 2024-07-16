@@ -34,6 +34,8 @@ async function initMap() {
     
   });
   nearbySearch(lat,lng,KEYWORD);
+  
+  
 }
 
 initMap();
@@ -48,10 +50,30 @@ fetch(url, {
     'X-Requested-With': 'XMLHttpRequest'
   }
 })
-.then(response => response.json())
-.then(data => console.log(data))
+.then(function (response){
+  return response.json();
+})
+.then(function (data){
+  console.log(data);
+  createMarker(data);
+})
+// .then(response => response.json())
+// .then(data => console.log(data))
 .catch(error => console.error('Error:', error));
 
+}
+function createMarker(place,index) {
+  if (!place.results[index].geometry || !place.results[index].geometry.location) return;
+
+  const marker = new google.maps.Marker({
+    map,
+    position: place.results[index].geometry.location,
+  });
+
+  google.maps.event.addListener(marker, "click", () => {
+    infowindow.setContent(place.results[index].name || "");
+    infowindow.open(map);
+  });
 }
 
 initMap();
