@@ -42,6 +42,7 @@ nav ul li a:hover {
 main {
   padding: 2rem;
   text-align: center;
+  padding-bottom: 5rem;
 }
 
 #welcome-section {
