@@ -72,11 +72,13 @@ async function createMarker(place, index) {
   // console.log(place.results[index]);
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
   infowindow = new InfoWindow();
+  
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
     "marker"
   );
+  
   const pin = new PinElement({
-    glyph: `${index + 1}`,
+    glyph: '',
     scale: 1.5,
   });
   const cMarker = new AdvancedMarkerElement({
@@ -85,6 +87,7 @@ async function createMarker(place, index) {
     title: place.results[index].name,
     content: pin.element,
     gmpClickable: true,
+
     // icon: {
     //   url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
     // },
