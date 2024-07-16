@@ -2,6 +2,7 @@ const placesApiKey = "AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE";
 const johnsKey ="AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o"
 const lat = 32.7767;
 const lng = -96.7970;
+const KEYWORD ='resturant'
 // Testing google.gecoding api;
 // fetch(locQueryUrl)
 //     .then(function (response) {
@@ -32,13 +33,15 @@ async function initMap() {
     zoom: 8,
     
   });
-  nearbySearch();
+  nearbySearch(lat,lng,KEYWORD);
+  
+  
 }
 
 initMap();
 
-function nearbySearch() {
-  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=500&types=resturants&length=10`;
+function nearbySearch(lat,lng,keyword) {
+  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=1500&keyword=${keyword}`;
 
 fetch(url, {
   method: 'GET',
@@ -47,10 +50,52 @@ fetch(url, {
     'X-Requested-With': 'XMLHttpRequest'
   }
 })
-.then(response => response.json())
-.then(data => console.log(data))
+.then(function (response){
+  return response.json();
+})
+.then(function (data){
+  // console.log(data);
+  renderMarkers(data);
+})
+// .then(response => response.json())
+// .then(data => console.log(data))
 .catch(error => console.error('Error:', error));
 
+}
+function createMarker(place,index) {
+  if (!place.results[index].geometry || !place.results[index].geometry.location) return;
+
+  const marker = new google.maps.Marker({
+    map,
+    position: place.results[index].geometry.location,
+  });
+
+  google.maps.event.addListener(marker, "click", () => {
+    infowindow.setContent(place.results[index].name || "");
+    infowindow.open(map);
+  });  
+}
+
+function renderMarkers(data){
+  let count = 0;
+  let i = 0;
+  while (count < 5 && i < data.results.length) {
+    if(data.results[i].rating > 4.3){
+      createMarker(data,i);
+      count++;
+      i++;
+    }
+    else if(data.results[i].rating > 4) {
+      createMarker(data,i);
+      count++;
+      i++;
+
+    }
+    else{
+      i++;
+    }
+    
+  }
 }
 
 initMap();
