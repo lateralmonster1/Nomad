@@ -54,8 +54,8 @@ fetch(url, {
   return response.json();
 })
 .then(function (data){
-  console.log(data);
-  createMarker(data);
+  // console.log(data);
+  renderMarkers(data);
 })
 // .then(response => response.json())
 // .then(data => console.log(data))
@@ -73,7 +73,29 @@ function createMarker(place,index) {
   google.maps.event.addListener(marker, "click", () => {
     infowindow.setContent(place.results[index].name || "");
     infowindow.open(map);
-  });
+  });  
+}
+
+function renderMarkers(data){
+  let count = 0;
+  let i = 0;
+  while (count < 5 && i < data.results.length) {
+    if(data.results[i].rating > 4.3){
+      createMarker(data,i);
+      count++;
+      i++;
+    }
+    else if(data.results[i].rating > 4) {
+      createMarker(data,i);
+      count++;
+      i++;
+
+    }
+    else{
+      i++;
+    }
+    
+  }
 }
 
 initMap();
