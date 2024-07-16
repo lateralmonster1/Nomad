@@ -72,14 +72,16 @@ async function createMarker(place, index) {
   // console.log(place.results[index]);
   const { Map, InfoWindow } = await google.maps.importLibrary("maps");
   infowindow = new InfoWindow();
-  
+
   const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
     "marker"
   );
-  
+
   const pin = new PinElement({
-    glyph: '',
-    scale: 1.5,
+    glyph: "V",
+    scale: 1.25,
+    background: "blue",
+    glyphColor: "white"
   });
   const cMarker = new AdvancedMarkerElement({
     position: place.results[index].geometry.location,
@@ -87,10 +89,6 @@ async function createMarker(place, index) {
     title: place.results[index].name,
     content: pin.element,
     gmpClickable: true,
-
-    // icon: {
-    //   url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-    // },
   });
 
   // google.maps.event.addListener(cMarker, "click", () => {
@@ -99,14 +97,14 @@ async function createMarker(place, index) {
   // });
 
   // Add a click listener for each marker, and set up the info window.
-  cMarker.addListener("click", ({ domEvent, latLng }) => {
-    const { target } = domEvent;
+  // cMarker.addListener("click", ({ domEvent, latLng }) => {
+  //   const { target } = domEvent;
 
-    infowindow.close();
-    infowindow.setContent(`<p>${cMarker.title}</p><p>Location: ${place.results[index].vicinity}</p><p>Discription: ${place.results[index].types[0]}</p><p>Status: ${place.results[index].business_status}</p>
-      <p>Overall User Rating: ${place.results[index].rating}</p><p>Number of Reviews: ${place.results[index].user_ratings_total}</p>`);
-    infowindow.open(cMarker.map, cMarker);
-  });
+  //   infowindow.close();
+  //   infowindow.setContent(`<p>${cMarker.title}</p><p>Location: ${place.results[index].vicinity}</p><p>Discription: ${place.results[index].types[0]}</p><p>Status: ${place.results[index].business_status}</p>
+  //     <p>Overall User Rating: ${place.results[index].rating}</p><p>Number of Reviews: ${place.results[index].user_ratings_total}</p>`);
+  //   infowindow.open(cMarker.map, cMarker);
+  // });
 }
 
 function renderMarkers(data) {
