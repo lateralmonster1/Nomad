@@ -5,7 +5,7 @@ let lat = 32.7767;
 let lng = -96.797;
 const KEYWORD = "resturant";
 let map;
-let marker;
+let marker 
 let geocoder;
 let response;
 
@@ -21,7 +21,7 @@ async function initMap() {
   // map takes in lat/long coordinates from ("lat" and "lng" variables (defined above)?)
   map = new Map(document.getElementById("map"), {
     center: { lat: lat, lng: lng },
-    zoom: 8,
+    zoom: 15,
   });
   marker = new google.maps.Marker({
     map,
@@ -60,6 +60,10 @@ function createMarker(place, index) {
   const cMarker = new google.maps.Marker({
     map,
     position: place.results[index].geometry.location,
+
+    icon: {
+      url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+    }
   });
 
   google.maps.event.addListener(cMarker, "click", () => {
@@ -132,6 +136,8 @@ function geocode(request) {
       const { results } = result;
 
 console.log(results);
+
+
 
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
