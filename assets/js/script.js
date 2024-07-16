@@ -1,8 +1,10 @@
 const placesApiKey = "AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE";
-const johnsKey ="AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o"
+const johnsKey = "AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o"
+// lat/lng variables set location in map for initMap()
 const lat = 32.7767;
 const lng = -96.7970;
-const KEYWORD ='resturant'
+const KEYWORD = 'resturant'
+
 // Testing google.gecoding api;
 // fetch(locQueryUrl)
 //     .then(function (response) {
@@ -19,50 +21,48 @@ const KEYWORD ='resturant'
 
 
 //============================================================end of testing block================================================================
-// generates map on page, with given coordinates
+// generates map on page with given coordinates
 let service;
 let infowindow;
 
 let map;
-
+// creates map on page
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
-
+  // map takes in lat/long coordinates from ("lat" and "lng" variables (defined above)?)
   map = new Map(document.getElementById("map"), {
     center: { lat: lat, lng: lng },
     zoom: 8,
-    
+
   });
-  nearbySearch(lat,lng,KEYWORD);
-  
-  
+  nearbySearch(lat, lng, KEYWORD);
 }
 
 initMap();
-
-function nearbySearch(lat,lng,keyword) {
+// runs API search for locations nearby target, defined by same lat-long
+function nearbySearch(lat, lng, keyword) {
   const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=1500&keyword=${keyword}`;
 
-fetch(url, {
-  method: 'GET',
-  headers: {
-    'Origin': 'https://yourdomain.com',
-    'X-Requested-With': 'XMLHttpRequest'
-  }
-})
-.then(function (response){
-  return response.json();
-})
-.then(function (data){
-  // console.log(data);
-  renderMarkers(data);
-})
-// .then(response => response.json())
-// .then(data => console.log(data))
-.catch(error => console.error('Error:', error));
+  fetch(url, {
+    method: 'GET',
+    headers: {
+      'Origin': 'https://yourdomain.com',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log(data);
+      renderMarkers(data);
+    })
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
 
 }
-function createMarker(place,index) {
+function createMarker(place, index) {
   if (!place.results[index].geometry || !place.results[index].geometry.location) return;
 
   const marker = new google.maps.Marker({
@@ -73,30 +73,91 @@ function createMarker(place,index) {
   google.maps.event.addListener(marker, "click", () => {
     infowindow.setContent(place.results[index].name || "");
     infowindow.open(map);
-  });  
+  });
 }
 
-function renderMarkers(data){
+function renderMarkers(data) {
   let count = 0;
   let i = 0;
   while (count < 5 && i < data.results.length) {
-    if(data.results[i].rating > 4.3){
-      createMarker(data,i);
+    if (data.results[i].rating > 4.3) {
+      createMarker(data, i);
       count++;
       i++;
     }
-    else if(data.results[i].rating > 4) {
-      createMarker(data,i);
+    else if (data.results[i].rating > 4) {
+      createMarker(data, i);
       count++;
       i++;
 
     }
-    else{
+    else {
       i++;
     }
-    
+
   }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const hotelForm = document.getElementById('hotel-form');
+  const mainPageSection = document.getElementById('main-page');
+  const landingPageSection = document.getElementById('landing-page');
+
+  hotelForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const hotelInput = document.getElementById('hotel-input').value;
+    document.getElementById('location').textContent = hotelInput;
+    landingPageSection.classList.add('hide');
+    mainPageSection.classList.remove('hide');
+  });
+
+  newSearchLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    mainPageSection.classList.add('hide');
+    landingPageSection.classList.remove('hide');
+
+  });
+
+  initMap();
+});
+
+// Geocoding API code VVV
+
+// Function to store data in localStorage
+function storeData(query) {
+  let searchData = JSON.parse(localStorage.getItem("searchResults")) || [];
+  searchData.push(query);
+  localStorage.setItem("searchResults", JSON.stringify(searchData));
+}
+
+function clear() {
+  marker.setMap(null);
+  responseDiv.style.display = "none";
+}
+
+function geocode(request) {
+  clear();
+  geocoder
+    .geocode(request)
+    .then((result) => {
+      const { results } = result;
+
+      map.setCenter(results[0].geometry.location);
+      marker.setPosition(results[0].geometry.location);
+      marker.setMap(map);
+      responseDiv.style.display = "block";
+      response.innerText = JSON.stringify(result, null, 2);
+
+      console.log(results[0].geometry.location);
+      return results;
+
+
+    })
+    .catch((e) => {
+      alert("Geocode was not successful for the following reason: " + e);
+    });
+}
+
 
 initMap();
 
