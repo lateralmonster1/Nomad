@@ -101,8 +101,13 @@ async function createMarker(place, index) {
     const { target } = domEvent;
 
     infowindow.close();
-    infowindow.setContent(`<p>${cMarker.title}</p><p>Location: ${place.results[index].vicinity}</p><p>Discription: ${place.results[index].types[0]}</p><p>Status: ${place.results[index].business_status}</p>
-      <p>Overall User Rating: ${place.results[index].rating}</p><p>Number of Reviews: ${place.results[index].user_ratings_total}</p>`);
+    infowindow.setContent(`<p>${cMarker.title}</p>
+      <p>Location: ${place.results[index].vicinity}</p>
+      <p>Discription: ${place.results[index].types[0]}</p>
+      <p>Status: ${place.results[index].business_status}</p>
+      <p>Overall User Rating: ${place.results[index].rating}</p>
+      <p>Number of Reviews: ${place.results[index].user_ratings_total}</p>
+      <a href="https://maps.google.com/?q=${place.results[index].name} ${place.results[index].vicinity}" target="_blank">Check them out on Google Maps</a>`);
     infowindow.open(cMarker.map, cMarker);
   });
 }
@@ -123,6 +128,7 @@ function renderMarkers(data) {
       i++;
     }
   }
+  console.log(data.results[0]);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
