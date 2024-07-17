@@ -35,6 +35,7 @@ async function initMap() {
 
 initMap();
 // runs API search for locations nearby target, defined by same lat-long
+
 function nearbySearch(lat, lng, keyword) {
   const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=1500&keyword=${keyword}`;
 
