@@ -4,8 +4,8 @@
   <!-- Add badges using the following format: -->
   <!-- ![Name](urlToShieldHere)(urlToGithubHere) -->
 
-[![Contributors](https://img.shields.io/github/contributors/jazztazz1991/Parsemon.svg?style=plastic&logo=appveyor)](https://github.com/jazztazz1991/Parsemon/graphs/contributors)
-[![Issues](https://img.shields.io/github/issues/jazztazz1991/Parsemon.svg?style=plastic&logo=appveyor)](https://github.com/jazztazz1991/Parsemon/issues)
+[![Contributors](https://img.shields.io/github/contributors/breannacamacho/Nomad.svg?style=plastic&logo=appveyor)](https://github.com/breannacamacho/Nomad/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/breannacamacho/Nomad.svg?style=plastic&logo=appveyor)](https://github.com/breannacamacho/Nomad/issues)
 
 </div>
 
