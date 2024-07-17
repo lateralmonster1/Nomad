@@ -91,20 +91,25 @@ async function createMarker(place, index) {
     gmpClickable: true,
   });
 
-  // google.maps.event.addListener(cMarker, "click", () => {
-  //   infowindow.setContent(place.results[index].name || "");
-  //   infowindow.open(map);
-  // });
+  google.maps.event.addListener(cMarker, "click", () => {
+    infowindow.setContent(place.results[index].name || "");
+    infowindow.open(map);
+  });
 
   // Add a click listener for each marker, and set up the info window.
-  // cMarker.addListener("click", ({ domEvent, latLng }) => {
-  //   const { target } = domEvent;
+  cMarker.addListener("click", ({ domEvent, latLng }) => {
+    const { target } = domEvent;
 
-  //   infowindow.close();
-  //   infowindow.setContent(`<p>${cMarker.title}</p><p>Location: ${place.results[index].vicinity}</p><p>Discription: ${place.results[index].types[0]}</p><p>Status: ${place.results[index].business_status}</p>
-  //     <p>Overall User Rating: ${place.results[index].rating}</p><p>Number of Reviews: ${place.results[index].user_ratings_total}</p>`);
-  //   infowindow.open(cMarker.map, cMarker);
-  // });
+    infowindow.close();
+    infowindow.setContent(`<p>${cMarker.title}</p>
+      <p>Location: ${place.results[index].vicinity}</p>
+      <p>Discription: ${place.results[index].types[0]}</p>
+      <p>Status: ${place.results[index].business_status}</p>
+      <p>Overall User Rating: ${place.results[index].rating}</p>
+      <p>Number of Reviews: ${place.results[index].user_ratings_total}</p>
+      <a href="https://maps.google.com/?q=${place.results[index].name} ${place.results[index].vicinity}" target="_blank">Check them out on Google Maps</a>`);
+    infowindow.open(cMarker.map, cMarker);
+  });
 }
 
 function renderMarkers(data) {
@@ -123,6 +128,7 @@ function renderMarkers(data) {
       i++;
     }
   }
+  console.log(data.results[0]);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
