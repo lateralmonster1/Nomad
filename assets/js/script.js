@@ -50,7 +50,7 @@ function nearbySearch(lat, lng, keyword) {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
+      console.log(data);
       renderMarkers(data);
     })
 
