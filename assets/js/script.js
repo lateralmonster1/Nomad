@@ -1,5 +1,6 @@
 const placesApiKey = "AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE";
 const johnsKey = "AIzaSyDRxqCXElTKQflYnaYgK0_-nAGX7GSPT5o";
+const nearbyPlacesKey = "AIzaSyDXuU0_U1U28mH_SLMkz5xk25qc4djTuFI";
 // lat/lng variables set location in map for initMap()
 let lat = 32.7767;
 let lng = -96.797;
@@ -37,12 +38,12 @@ initMap();
 // runs API search for locations nearby target, defined by same lat-long
 
 function nearbySearch(lat, lng, keyword) {
-  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${placesApiKey}&location=${lat},${lng}&radius=1500&keyword=${keyword}`;
+  const url = `https://floating-headland-95050.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${nearbyPlacesKey}&location=${lat},${lng}&radius=1500&keyword=${keyword}`;
 
   fetch(url, {
     method: "GET",
     headers: {
-      Origin: "https://yourdomain.com",
+      Origin: "https://breannacamacho.github.io/Nomad/",
       "X-Requested-With": "XMLHttpRequest",
     },
   })
