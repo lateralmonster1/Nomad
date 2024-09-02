@@ -139,13 +139,14 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
+[Xavier Leon](https://github.com/lateralmonster1) - xavier3435@icloud.com
+
 [William Allred](https://github.com/AllredW) - allrewil@gmail.com
 
 [Breanna Camacho](https://github.com/breannacamacho) - breannacamacho1@gmail.com
 
 [Jordan Olsen Reeve](https://github.com/jreeve65) - jordan65reeve@yahoo.com
 
-[Xavier Leon](https://github.com/lateralmonster1) - xavier3435@icloud.com
 
 Project Links:
 
