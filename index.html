@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nomad</title>
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+    <!-- Landing Page Content -->
+    <main class="container">
+        <section id="landing-page" class="center-align">
+            <img src="./assets/images/nomad.png" alt="Nomad Logo" class="logo">
+            <h2>Where are you staying?</h2>
+            <form id="hotel-form" action="secondary.html" method="get" class="col s12">
+                <div class="input-field">
+                    <label for="hotel-input">Enter your hotel name, or city:</label>
+                    <input type="text" id="hotel-input" name="hotel" placeholder="Hotel Name" required>
+                </div>
+                <button type="submit" class="btn waves-effect waves-light blue">Let's Go!</button>
+            </form>
+            <div class="gif-container">
+                <img src="./assets/images/gif.gif" alt="Eating GIF">
+            </div>
+        </section>
+
+        <!-- Main Page Content (Hidden by Default) -->
+        <section id="main-page" class="hide">
+            <header>
+                <img src="./assets/images/nomad.png" alt="Nomad Logo" class="logo">
+            </header>
+            <nav>
+                <ul>
+                    <li><a id="newSearchLink" href="#">New Search</a></li>
+                    <li><a href="#">My Favourites</a></li>
+                </ul>
+            </nav>
+            <section id="welcome-section">
+                <h2>Welcome to <span id="location"></span>!</h2>
+                <p>Check out the mouthwatering smorgasbord of food options waiting for you below:</p>
+            </section>
+            <div id="map"></div>
+            <footer>
+                <p>&copy; 2024 Nomad</p>
+            </footer>
+        </section>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Google Maps JavaScript API -->
+    <script>(function(g){var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({key:"AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE",v:"weekly"});</script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg9V3D9j8G7AVVt1E9GiSY8Y_GIq9_hoE=&callback=initMap&v=weekly"
+      defer></script> -->
+    <script src="./assets/js/script.js"></script>
+
+</body>
+</html>
