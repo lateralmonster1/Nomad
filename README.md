@@ -11,10 +11,6 @@
 
 <!-- PROJECT LOGO -->
 
-<div align="center">
-  <a href="https://github.com/jazztazz1991/Parsemon">
-    <img src="./Nomad/assets/images/nomad.png" alt="Logo" width="300" height="100">
-  </a>
 
   <h3 align="center">Nomad</h3>
 
@@ -99,11 +95,9 @@ git clone https://github.com/breannacamacho/Nomad.git
 ## Usage
 
   <a href="https://github.com/breannacamacho/Nomad">
-    <img src="Nomad\assets\images\Nomad Landing Page Thumb.png" alt="Nomad's landing pate, featuring an input field and logo" width="600" height="400">
   </a>
 
   <a href="https://github.com/breannacamacho/Nomad">
-    <img src="Nomad\assets\images\Nomad Map Thumb.png" alt="Nomad's main page, featuring a map of the location provided by the user, with relevant markers on the field" width="600" height="400">
   </a>
 
 <!-- ROADMAP -->
