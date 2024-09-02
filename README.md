@@ -99,11 +99,11 @@ git clone https://github.com/breannacamacho/Nomad.git
 ## Usage
 
   <a href="https://github.com/breannacamacho/Nomad">
-    <img src="./Nomad/assets/images/Nomad Landing Page Thumb.png" alt="Nomad's landing pate, featuring an input field and logo" width="600" height="400">
+    <img src="Nomad\assets\images\Nomad Landing Page Thumb.png" alt="Nomad's landing pate, featuring an input field and logo" width="600" height="400">
   </a>
 
   <a href="https://github.com/breannacamacho/Nomad">
-    <img src="./Nomad/assets/images/Nomad Map Thumb.png" alt="Nomad's main page, featuring a map of the location provided by the user, with relevant markers on the field" width="600" height="400">
+    <img src="Nomad\assets\images\Nomad Map Thumb.png" alt="Nomad's main page, featuring a map of the location provided by the user, with relevant markers on the field" width="600" height="400">
   </a>
 
 <!-- ROADMAP -->
